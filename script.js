@@ -4,24 +4,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function updateLoanAmount() {
     const loanType = document.getElementById('loan-type').value;
-    let loanAmount;
+    let maxAmount;
     switch (loanType) {
         case 'car':
-            loanAmount = 1000000;
+            maxAmount = 1000000;
             break;
         case 'home':
-            loanAmount = 20000000;
+            maxAmount = 20000000;
             break;
         case 'bike':
-            loanAmount = 150000;
+            maxAmount = 150000;
             break;
         case 'personal':
-            loanAmount = 1000000;
+            maxAmount = 10000000;
             break;
         default:
-            loanAmount = 0;
+            maxAmount = 0;
     }
-    document.getElementById('loan-amount').max = loanAmount;
+    document.getElementById('loan-amount').max = maxAmount;
 }
 
 function checkMaxAmount() {
@@ -45,7 +45,7 @@ function checkMaxAmount() {
             maxAmount = 0;
     }
     if (loanAmount > maxAmount) {
-        alert(`You entered more than max amount for ${loanType}. The maximum amount is ${maxAmount}.`);
+        alert(`You entered more than the max amount for ${loanType}. The maximum amount is ${maxAmount}.`);
         document.getElementById('loan-amount').value = maxAmount;
     }
 }
@@ -67,13 +67,14 @@ function calculateEMI() {
     const emiTableBody = document.getElementById('emi-table-body');
     emiTableBody.innerHTML = '';
 
+    let remainingPrincipal = principal;
     let totalInterest = 0;
     let totalPrincipalPaid = 0;
 
     for (let i = 1; i <= tenureMonths; i++) {
-        const interestPaid = principal * interestRate;
+        const interestPaid = remainingPrincipal * interestRate;
         const principalPaid = emi - interestPaid;
-        principal -= principalPaid;
+        remainingPrincipal -= principalPaid;
 
         totalInterest += interestPaid;
         totalPrincipalPaid += principalPaid;
@@ -97,13 +98,13 @@ function calculateEMI() {
     }
 
     const totalPayable = totalPrincipalPaid + totalInterest;
-    const extraInterest = totalPayable - principal;
+    const extraInterest = totalInterest;
 
     const summaryTableBody = document.getElementById('summary-table-body');
     summaryTableBody.innerHTML = `
         <tr>
             <td>Total Loan Amount</td>
-            <td>${totalPrincipalPaid.toFixed(2)}</td>
+            <td>${principal.toFixed(2)}</td>
         </tr>
         <tr>
             <td>Total Interest Paid</td>
