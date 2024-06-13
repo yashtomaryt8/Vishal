@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label for="loan-amount">Loan Amount:</label>
-                <input type="number" id="loan-amount" name="loan-amount" readonly>
+                <input type="number" id="loan-amount" name="loan-amount" oninput="checkMaxAmount()">
             </div>
             <div class="form-group">
                 <label for="interest-rate">Interest Rate (% per annum):</label>
@@ -40,9 +40,16 @@
                     <tr>
                         <th>Month</th>
                         <th>EMI</th>
+                        <th>Interest Paid</th>
+                        <th>Principal Paid</th>
                     </tr>
                 </thead>
                 <tbody id="emi-table-body">
+                </tbody>
+            </table>
+            <h2>Summary</h2>
+            <table>
+                <tbody id="summary-table-body">
                 </tbody>
             </table>
         </div>
