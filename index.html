@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan EMI Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Loan EMI Calculator</h1>
+        <form id="loan-form">
+            <div class="form-group">
+                <label for="loan-type">Loan Type:</label>
+                <select id="loan-type" name="loan-type" onchange="updateLoanAmount()">
+                    <option value="car">Car</option>
+                    <option value="home">Home</option>
+                    <option value="bike">Two-Wheeler</option>
+                    <option value="personal">Personal</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="loan-amount">Loan Amount:</label>
+                <input type="number" id="loan-amount" name="loan-amount" readonly>
+            </div>
+            <div class="form-group">
+                <label for="interest-rate">Interest Rate (% per annum):</label>
+                <input type="number" id="interest-rate" name="interest-rate" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="loan-tenure">Loan Tenure (years):</label>
+                <input type="number" id="loan-tenure" name="loan-tenure" required>
+            </div>
+            <button type="button" onclick="calculateEMI()">Calculate EMI</button>
+        </form>
+        <div id="result" style="display:none;">
+            <h2>EMI Details</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>EMI</th>
+                    </tr>
+                </thead>
+                <tbody id="emi-table-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
