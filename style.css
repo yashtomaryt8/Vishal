@@ -40,6 +40,11 @@ input, select {
     border-radius: 5px;
 }
 
+p {
+    margin-top: 5px;
+    color: #777;
+}
+
 button {
     width: 100%;
     padding: 10px;

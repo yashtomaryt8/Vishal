@@ -22,6 +22,7 @@ function updateLoanAmount() {
             maxAmount = 0;
     }
     document.getElementById('loan-amount').max = maxAmount;
+    document.getElementById('max-amount-info').innerText = `Maximum amount for ${loanType} loan is ${maxAmount}.`;
 }
 
 function checkMaxAmount() {
